@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AsistenciasPage } from './asistencias.page';
+import { ModalEsperaPageModule } from '../modal-espera/modal-espera.module';
+import { ModalEsperaPage } from '../modal-espera/modal-espera.page';
 
 const routes: Routes = [
   {
@@ -19,8 +21,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ModalEsperaPageModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AsistenciasPage]
+  declarations: [AsistenciasPage],
+  entryComponents: [ModalEsperaPage]
 })
 export class AsistenciasPageModule {}

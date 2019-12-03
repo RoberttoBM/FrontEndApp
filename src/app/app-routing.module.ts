@@ -1,62 +1,27 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from './services/auth/auth-guard.service';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
-  },
-  {
-    path: 'notas',
-    loadChildren: () => import('./pages/notas/notas.module').then(m => m.NotasPageModule)
-  },
-  {
-    path: 'asistencias',
-    loadChildren: () => import('./pages/asistencias/asistencias.module').then(m => m.AsistenciasPageModule)
-  },
-  {
-    path: 'dashboard',
-    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardPageModule)
-  },
-  {
-    path: 'help',
-    loadChildren: () => import('./pages/help/help.module').then(m => m.HELPPageModule)
-  },
-  {
-    path: 'contactos',
-    loadChildren: () => import('./pages/contactos/contactos.module').then(m => m.ContactosPageModule)
-  },
-  {
-    path: 'nosotros',
-    loadChildren: () => import('./pages/nosotros/nosotros.module').then(m => m.NosotrosPageModule)
-  },
-  {
-    path: 'bimestre1',
-    loadChildren: () => import('./pages/notas/bimestres/bimestre1/bimestre1.module').then(m => m.Bimestre1PageModule)
-  },
-  {
-    path: 'bimestre2',
-    loadChildren: () => import('./pages/notas/bimestres/bimestre2/bimestre2.module').then(m => m.Bimestre2PageModule)
-  },
-  {
-    path: 'bimestre3',
-    loadChildren: () => import('./pages/notas/bimestres/bimestre3/bimestre3.module').then(m => m.Bimestre3PageModule)
-  },
-  {
-    path: 'bimestre4',
-    loadChildren: () => import('./pages/notas/bimestres/bimestre4/bimestre4.module').then(m => m.Bimestre4PageModule)
-  },
-  {
-    path: 'bimestre5',
-    loadChildren: () => import('./pages/notas/bimestres/bimestre5/bimestre5.module').then(m => m.Bimestre5PageModule)
-  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule', canActivate: [AuthGuardService] },
+  { path: 'desarrolladores', loadChildren: './pages/desarrolladores/desarrolladores.module#DesarrolladoresPageModule' },
+  { path: 'help', loadChildren: './pages/help/help.module#HELPPageModule' },   
+  { path: 'asistencias', loadChildren: './pages/asistencias/asistencias.module#AsistenciasPageModule' },
   
+//  { path: 'notas', loadChildren: './pages/notas/notas.module#NotasPageModule' },
   
+/*{ path: 'b1', loadChildren: './pages/notas/b1/b1.module#B1PageModule' },
+  { path: 'b2', loadChildren: './pages/notas/b2/b2.module#B2PageModule' },
+  { path: 'b3', loadChildren: './pages/notas/b3/b3.module#B3PageModule' },
+  { path: 'b4', loadChildren: './pages/notas/b4/b4.module#B4PageModule' },
+  { path: 'b5', loadChildren: './pages/notas/b5/b5.module#B5PageModule' }, */
+
+  
+
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
@@ -64,4 +29,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-

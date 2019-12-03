@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { Help } from '../pages/intefaces/IHelp';
+import { Help } from '../interfaces/IHelp';
+import { URL } from './../../environments/environment';
 
 
 @Injectable({
@@ -12,21 +12,14 @@ export class HelpService {
 
   constructor(public http: HttpClient) { }
 
-  url = environment.url_api_rest
-
-  getAll(): Observable<any> {
-
-    return this.http.get(`${this.url}/help/read`);
-  }
-
   saveConsulta(help: Help) {
     console.log(help);
     return new Promise((resolve, reject) => {
-      // tslint:disable-next-line: deprecation
-      this.http.post<Help>(`${this.url}/help/read`, help).subscribe(res => {
+      this.http.post<Help>(`${URL.url}/help/create`, help).subscribe(res => {
         resolve(res);
       });
     });
   }
+
 
 }
