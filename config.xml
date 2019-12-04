@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.vallegrande.fractal" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Fractal</name>
+    <name>Edooca</name>
     <description />
-    <author email="roberto.borjas@vallegrande.edu.pe" href="https://github.com/RoberttoBM">Roberto 🍪</author>
+    <author email="roberto.borjas@vallegrande.edu.pe" href="https://github.com/RoberttoBM">Roberto BM</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
