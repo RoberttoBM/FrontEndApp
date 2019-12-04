@@ -3,8 +3,8 @@ export const environment = {
 };
 
 export const URL = {
-  //url: "http://35.237.68.44:3002"
-  url: "http://localhost:3000"
+  url: "http://35.237.68.44:3002"
+  //url: "http://localhost:3000"
 }
 
 export const ENTITY = {
