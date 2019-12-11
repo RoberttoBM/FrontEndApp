@@ -4,8 +4,6 @@ import { ModalController } from '@ionic/angular';
 import { ToastService } from '../../services/toast.service';
 import { UsuarioLocalService } from '../../services/usuario/usuario-local.service';
 import { AuthService } from '../../services/auth/auth.service';
-import { Router } from '@angular/router';
-import { INotas } from '../../interfaces/INotas';
 
 @Component({
   selector: 'app-modal-espera',
@@ -15,20 +13,15 @@ import { INotas } from '../../interfaces/INotas';
 export class ModalEsperaPage implements OnInit {
 
   @Input() dato: string;
-  private user: Usuario;
-  private notas: INotas
 
   constructor(
-    private modalEsperaCtrl: ModalController,
     public toastService: ToastService,
-    private router: Router,
-    private authService: AuthService,
-    private usuarioLocalService: UsuarioLocalService
+    private modalEsperaCtrl: ModalController,
+
+
 
   ) { }
 
-
-  //Al iniciar el modal de espera llevamos a cabo la acción de guardar los datos de logueo local
   ngOnInit() {
     switch (this.dato) {
       case 'sync':
@@ -37,17 +30,12 @@ export class ModalEsperaPage implements OnInit {
     }
   }
 
-  //Una ves logueado guardamos al usuario local y el token
   async sync() {
-    this.user = await this.usuarioLocalService.getUser();
-    //this.notas = await this.usuarioLocalService.getNotas();
-    const token = await this.authService.getToken();
     this.toastService.presentToast1("","");
     this.salir();
-  
+
   }
 
-  //Despues de guardarlo los datos, salimos del gif de espera con un tiempo asignado
   async salir() {
     setTimeout(async () => {
       await this.modalEsperaCtrl.dismiss();

@@ -6,8 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AsistenciasPage } from './asistencias.page';
-import { ModalEsperaPageModule } from '../modal-espera/modal-espera.module';
 import { ModalEsperaPage } from '../modal-espera/modal-espera.page';
+import { ModalEsperaPageModule } from '../modal-espera/modal-espera.module';
 
 const routes: Routes = [
   {

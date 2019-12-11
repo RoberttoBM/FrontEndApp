@@ -58,21 +58,19 @@ export class AuthService {
         }
       }
     });
-  }
+  } 
 
   onLogin(){
     this.authenticationState.next(true);
   }
 
-  login(credentials) {
+  login(credentials): Observable<Usuario> {
     return this.http.post<Usuario>(`${URL.url}/auth/login`, credentials)
       .pipe(
         tap(res => {
-          console.log("consulta",res);
           this.storage.set(TOKEN_KEY, res['access_token']);
           this.user = this.helper.decodeToken(res['access_token']);
           delete res['access_token'];
-          console.log("usuario",this.user);
           this.loading.dismiss();
         }),
         catchError(async(e) => {

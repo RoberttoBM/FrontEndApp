@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
     </ion-buttons>
-    <ion-title style="color:rgb(255, 255, 255)">ASISTENCIAS:</ion-title>
+    <ion-title style="color:rgb(255, 255, 255)">Control de Asistencias:</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,17 +11,17 @@
 <ion-content padding>
 
   <div text-center padding>
-    <img src="./../../../assets/nerd.png">
+    <img src="./../../../assets/nerd.png" class="center"> 
   </div>
 
-  <ion-list>
+  <ion-list *ngFor="let asistencias of Asistencias">
 
 
     <ion-item>
       N° DE ASISTENCIAS:
     </ion-item>
     <ion-button expand="block">
-      <h2>{{Usuario.ASISTENCIAS}}</h2>
+      <h2>{{asistencias.ASISTENCIAS}}</h2>
     </ion-button>
     <div></div>
     <div></div>
@@ -31,17 +31,17 @@
       N° DE FALTAS:
     </ion-item>
     <ion-button expand="block" color="danger">
-      <h2>{{Usuario.FALTAS}}</h2>
+      <h2>{{asistencias.FALTAS}}</h2>
     </ion-button>
     <div></div>
     <div></div>
     <div></div>
-    
+
     <ion-item>
       N° DE ASITENCIAS INADECUADAS:
     </ion-item>
     <ion-button (click)="presentAlert()" expand="block" color="warning">
-      <h2>{{Usuario.MV}}</h2>
+      <h2>{{asistencias.MV}}</h2>
     </ion-button>
 
 

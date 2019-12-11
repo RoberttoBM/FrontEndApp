@@ -39,12 +39,6 @@ export class LoginPage implements OnInit {
     return modal;
   }
 
-  ionViewWillEnter() {
-    console.log("Ingresar Usuario y Contraseña");
-    this.usuario = "";
-    this.password = "";
-  }
-
 
   async signIn() {
 
@@ -52,18 +46,15 @@ export class LoginPage implements OnInit {
       username: this.usuario,
       password: this.password
     }
-    console.log(credentials);
+
     try {
       await this.authService.presentLoading();
-      this.authService.login(credentials).subscribe(async (res: any) => {
-        //await this.userLocalService.saveNotas(res);
+      this.authService.login(credentials).subscribe(async (res) => {
         await this.userLocalService.saveUser(res);
-        console.log(res);
         let mod = await this.onModal("sync");
         await mod.present();
         this.authService.onLogin();
       }, (err) => {
-        console.log(err);
         this.toastService.presentToast("Usuario y/o contraseña incorrectos", "danger");
       });
     } catch (error) {
@@ -78,4 +69,3 @@ export class LoginPage implements OnInit {
   }
 
 }
-

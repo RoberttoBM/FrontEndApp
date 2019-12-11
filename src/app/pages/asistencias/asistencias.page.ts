@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalEsperaPage } from '../modal-espera/modal-espera.page';
-import { Usuario } from '../../interfaces/IUsuario';
 import { UsuarioLocalService } from '../../services/usuario/usuario-local.service';
-import { AuthService } from '../../services/auth/auth.service';
-import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { Network } from '@ionic-native/network/ngx';
-
+import { ModalController, AlertController } from '@ionic/angular';
+import { UsuarioService } from '../../services/usuario/usuario.service';
+import { Asistencias } from '../../interfaces/IUsuario';
+import { ModalEsperaPage } from '../modal-espera/modal-espera.page';
 
 @Component({
   selector: 'app-asistencias',
@@ -14,33 +13,24 @@ import { Network } from '@ionic-native/network/ngx';
 })
 export class AsistenciasPage implements OnInit {
 
-  Usuario: Usuario = { IDPER: 0, NOMPER: "", APEPER: "", DNIPER: 0, DIRPER: "", GRAAUL: "", SECAUL: "", ASISTENCIAS: "", CB: "", FALTAS: "", MV: "", USUPER: "", CONTRPER: "" }
-
+  Asistencias: Asistencias[] = []
 
   constructor(
     private usuarioLocalService: UsuarioLocalService,
+    private network: Network,
     private alertController: AlertController,
     private modalCtrl: ModalController,
-    private authService: AuthService,
-    private network: Network,
-    private toastCtrl: ToastController, ) {
-
-    this.usuarioLocalService.getUser().then(resp => {
-      this.Usuario = resp;
-    });
+    private usuarioService: UsuarioService) {
 
   }
 
-  async presentToast(message: string, color: string) {
-    const toast = await this.toastCtrl.create({
-      color,
-      message,
-      duration: 1000
+  async ngOnInit() {
+    let user = await this.usuarioLocalService.getUser();
+    this.usuarioService.getAsistencias(user.IDPER).subscribe(asistencias => {
+      this.Asistencias = asistencias;
+      console.log(this.Asistencias);
     });
-    toast.present();
   }
-
-  ngOnInit() { }
 
   //Espera para cargar los datos
   async onModal(dato) {
@@ -60,8 +50,6 @@ export class AsistenciasPage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      //header: 'ASISTENCIAS INAPROPIADAS:',
-      //subHeader: '',
       message: 'Si el(la) estudiante asiste tarde o no cumple con los reglamentos al llegar a la Institución se considerará como una Asistencia Inadecuada',
       buttons: ['OK']
     });
